@@ -24,3 +24,5 @@ What are some things you would like to do if you had more time? Is there anythin
 - Briefly toyed with the idea of using bumpers on the sides of collection area to bounce objects and increase their point value for each bounce, but felt like too much
 - Find more sound effects, went with some silly ones for now
 - Considered speeding up spawn rate over time, but felt like this would lead to a broken difficulty curve, might be worth exploring time based changes to gameplay
+- I might add an indication of point values for the player to see, but didn't want to mess with more art and the minimalist aesthetic for a short assignment
+- Add a simple Quit button to the menus, felt unnecessary for the assignment
