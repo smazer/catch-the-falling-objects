@@ -5483,6 +5483,9 @@ MonoBehaviour:
   _poolSize: 10
   _minSpawnInterval: 0.2
   _maxSpawnInterval: 2
+  _bonusSpawnForce: 15
+  _minBonusSpawnAngle: 25
+  _maxBonusSpawnAngle: 60
 --- !u!1 &1281121483
 GameObject:
   m_ObjectHideFlags: 0

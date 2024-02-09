@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -24,10 +25,11 @@ public class GameManager : MonoBehaviour
     private float _timer;
     private bool _gameActive;
 
-    public static GameManager Instance { get; private set; }
+    //singleton for a quick exercise, generally would use DI or Service Locator
+    public static GameManager Instance { get; private set; } 
     
     private int _score = 0;
-    private void Awake()
+    private void Awake() //singleton static reference setup
     {
         if (Instance == null)
         {
@@ -36,13 +38,22 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
         }
-        _timer = _timeLimit;
-        _score = 0;
-        ChangeGameState(true);
-        UpdateUI();
-        _replayButton.onClick.AddListener(RestartGame);
+    }
+
+    private void OnDestroy()
+    {
+        //if this was a duplicate being destroyed in Awake...don't kill the legitimate singleton instance
+        if (Instance == this) 
+        {
+            Instance = null;
+        }
+    }
+
+    private void Start()
+    {
+        InitNewGame();
+        _replayButton.onClick.AddListener(InitNewGame);
         _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
     }
     
@@ -64,7 +75,7 @@ public class GameManager : MonoBehaviour
             {
                 EndGame();
             }
-            UpdateUI();
+            UpdateTime();
         }
     }
 
@@ -73,15 +84,20 @@ public class GameManager : MonoBehaviour
         if (_gameActive)
         {
             _score += points;
-            UpdateUI();
+            UpdateScore();
         }
     }
 
-    private void UpdateUI()
+    private void UpdateTime()
     {
-        _scoreText.text = $"Score: {_score}";
         _timerText.text = $"Time: {Mathf.CeilToInt(_timer)}";
     }
+
+    private void UpdateScore()
+    {
+        _scoreText.text = $"Score: {_score}";
+    }
+    
 
     private void EndGame()
     {
@@ -89,12 +105,13 @@ public class GameManager : MonoBehaviour
         _endScoreText.text = $"Final Score:<br>{_score}";
     }
 
-    public void RestartGame()
+    public void InitNewGame()
     {
         _score = 0;
         _timer = _timeLimit;
         ChangeGameState(true);
-        UpdateUI();
+        UpdateTime();
+        UpdateScore();
     }
 }
 
