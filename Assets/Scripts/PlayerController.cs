@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        //get bounds based off camera view
         Camera cam = Camera.main;
         Vector3 bounds = cam.ScreenToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
         
@@ -40,6 +41,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Unity Input System callback, using to get the move input for arrow keys and A/S (gamepad should also work)
+    /// </summary>
+    /// <param name="context"></param>
     private void OnActionTriggered(InputAction.CallbackContext context)
     {
         if (context.action.name.Equals(_moveActionName))
@@ -48,6 +53,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Movement handling
+    /// </summary>
     private void FixedUpdate()
     {
         Vector2 movement = new Vector2(_moveInput.x, 0) * _moveSpeed * Time.fixedDeltaTime;

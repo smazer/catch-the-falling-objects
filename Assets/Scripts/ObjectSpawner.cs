@@ -170,6 +170,10 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Late addition feature to spawn bonus objects when collecting an object (currently only used for stars)
+    /// </summary>
+    /// <param name="prefabToSpawn"></param>
     private void BonusSpawn(GameObject prefabToSpawn)
     {
         int _spawnCount = Random.Range(1, 3); // 1 or 2
@@ -206,6 +210,11 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Helper function to get a vector from an angle offset from Vector2.Up
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <returns></returns>
     public Vector2 AngleToVector(float angle)
     {
         // Convert angle from degrees to radians

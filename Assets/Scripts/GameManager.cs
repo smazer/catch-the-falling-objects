@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
         _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
     }
     
+    /// <summary>
+    /// State changed event firing, on restart and game over
+    /// </summary>
+    /// <param name="active"></param>
     private void ChangeGameState(bool active)
     {
         _gameActive = active;
